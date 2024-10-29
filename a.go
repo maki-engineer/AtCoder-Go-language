@@ -5,14 +5,13 @@ import (
 )
 
 func ProblemA() {
-	var a, b, c int
-	var s string
+	var a, b int
 
-	fmt.Scanf("%d", &a)
-	fmt.Scanf("%d %d", &b, &c)
-	fmt.Scanf("%s", &s)
+	fmt.Scanf("%d %d", &a, &b)
 
-	result := a + b + c
-
-	fmt.Println(result, s)
+	if a*b%2 == 0 {
+		fmt.Println("Even")
+	} else {
+		fmt.Println("Odd")
+	}
 }
