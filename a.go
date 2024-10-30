@@ -2,16 +2,21 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func ProblemA() {
-	var a, b int
+	var s string
+	fmt.Scanf("%s", &s)
 
-	fmt.Scanf("%d %d", &a, &b)
+	marbleList := strings.Split(s, "")
+	result := 0
 
-	if a*b%2 == 0 {
-		fmt.Println("Even")
-	} else {
-		fmt.Println("Odd")
+	for _, v := range marbleList {
+		if v == "1" {
+			result += 1
+		}
 	}
+
+	fmt.Println(result)
 }
