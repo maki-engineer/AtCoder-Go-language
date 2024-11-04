@@ -2,51 +2,38 @@ package main
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
+	"math"
+	"sort"
 )
 
-func mapFunc(strArray []string, f func(strNumber string) int) []int {
-	result := []int{}
-
-	for _, v := range strArray {
-		result = append(result, f(v))
-	}
-
-	return result
-}
-
-func sum(numberList []int) int {
-	result := 0
-
-	for _, v := range numberList {
-		result += v
-	}
-
-	return result
-}
-
 func ProblemA() {
-	var N, A, B int
-	result := 0
+	var N int
+	var A []int
 
-	fmt.Scanf("%d %d %d", &N, &A, &B)
+	fmt.Scan(&N)
 
-	for i := 1; i <= N; i++ {
-		s := strconv.Itoa(i)
+	scoreList := []int{0, 0}
 
-		numberList := mapFunc(strings.Split(s, ""), func(strNumber string) int {
-			v, _ := strconv.Atoi(strNumber)
+	for i := 0; i < N; i++ {
+		var a int
+		fmt.Scan(&a)
 
-			return v
-		})
+		A = append(A, a)
+	}
 
-		sumTotal := sum(numberList)
+	// 降順にソート
+	sort.Slice(A, func(i, j int) bool {
+		return A[i] > A[j]
+	})
 
-		if (A <= sumTotal) && (sumTotal <= B) {
-			result += i
+	// スコアを計算
+	for i := 0; i < N; i++ {
+		if i%2 == 0 {
+			scoreList[0] += A[i]
+		} else {
+			scoreList[1] += A[i]
 		}
 	}
 
-	fmt.Println(result)
+	fmt.Println(int(math.Abs(float64(scoreList[0]) - float64(scoreList[1]))))
 }
