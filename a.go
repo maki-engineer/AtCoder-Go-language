@@ -2,38 +2,38 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"sort"
 )
 
 func ProblemA() {
 	var N int
-	var A []int
-
+	var D []int
 	fmt.Scan(&N)
 
-	scoreList := []int{0, 0}
+	result := 0
+	n := 0
 
 	for i := 0; i < N; i++ {
-		var a int
-		fmt.Scan(&a)
+		var d int
 
-		A = append(A, a)
+		fmt.Scan(&d)
+
+		D = append(D, d)
 	}
 
 	// 降順にソート
-	sort.Slice(A, func(i, j int) bool {
-		return A[i] > A[j]
+	sort.Slice(D, func(i, j int) bool {
+		return D[i] > D[j]
 	})
 
-	// スコアを計算
-	for i := 0; i < N; i++ {
-		if i%2 == 0 {
-			scoreList[0] += A[i]
-		} else {
-			scoreList[1] += A[i]
+	for _, v := range D {
+		if n == v {
+			continue
 		}
+
+		n = v
+		result++
 	}
 
-	fmt.Println(int(math.Abs(float64(scoreList[0]) - float64(scoreList[1]))))
+	fmt.Println(result)
 }
