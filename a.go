@@ -2,38 +2,33 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func ProblemA() {
-	var N int
-	var D []int
-	fmt.Scan(&N)
+	var N, Y int
+	fmt.Scanf("%d %d", &N, &Y)
 
-	result := 0
-	n := 0
+	A := 0 // 10,000円札
+	B := 0 // 5,000円札
+	C := 0 // 1,000円札
 
-	for i := 0; i < N; i++ {
-		var d int
+	for i := 0; i <= N; i++ {
+		for j := 0; j <= N; j++ {
+			checkTotal := ((10_000 * i) + (5_000 * j) + (1_000 * (N - i - j))) == Y
+			checkCount := i+j+(N-i-j) == N
 
-		fmt.Scan(&d)
-
-		D = append(D, d)
-	}
-
-	// 降順にソート
-	sort.Slice(D, func(i, j int) bool {
-		return D[i] > D[j]
-	})
-
-	for _, v := range D {
-		if n == v {
-			continue
+			if checkTotal && checkCount && (N-i-j) >= 0 {
+				A = i
+				B = j
+				C = N - i - j
+				break
+			}
 		}
-
-		n = v
-		result++
 	}
 
-	fmt.Println(result)
+	if (A == 0) && (B == 0) && (C == 0) {
+		fmt.Println(-1, -1, -1)
+	} else {
+		fmt.Println(A, B, C)
+	}
 }
